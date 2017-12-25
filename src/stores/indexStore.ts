@@ -1,29 +1,34 @@
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
+import { Article } from '../data/article';
 
 export class IndexStore {
 
-    // mutation
-    private changeTextSubject_: BehaviorSubject<string> = new BehaviorSubject("");
+    // mutation and state
+    private changeTextSubject_: BehaviorSubject<Article> = new BehaviorSubject(new Article());
 
-    // state
-    private text: string;
-    
     constructor(text: string = "") {
         this.mutateText(text);
     }
 
     // actions
     public inputText(value): void {
+        // APIを叩く処理はここに入れる
         this.mutateText(value); // commit
     }
 
-    // mutation
-    public mutateText(value): void {
-        this.text = value; // mutate
-        this.changeTextSubject_.next(this.text); // render
+    // 仮置きの保存処理
+    public submit(): void {
+        alert(this.changeTextSubject_.getValue().content + "was send.")
     }
 
-    public get onChangedText(): Observable<string> {
+    // mutation and state
+    public mutateText(value: string): void {
+        var article = this.changeTextSubject_.getValue();
+        article.content = value;
+        this.changeTextSubject_.next(article); // render
+    }
+
+    public get onChangedText(): Observable<Article> {
         return this.changeTextSubject_.asObservable();
     }
 }

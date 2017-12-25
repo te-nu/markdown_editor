@@ -1,5 +1,7 @@
 <template lang="pug">
-    textarea(ref="inputArea" v-model="text")
+    div
+        textarea(ref="inputArea" v-model="text")
+        input(type="submit" @click="store_.submit()")
 </template>
 
 <script lang="ts">
@@ -7,6 +9,7 @@ import Vue from 'vue';
 import {Observable} from 'rxjs/Rx';
 import {Component, Prop} from "vue-property-decorator"
 import {IndexStore} from "../stores/indexStore"
+import {Article} from '../data/article';
 
 @Component({})
 export default class WriteArea extends Vue {
@@ -19,8 +22,8 @@ export default class WriteArea extends Vue {
         Observable.fromEvent(<HTMLElement>this.$refs.inputArea, 'input').subscribe((event) => {
             this.store_.inputText(event['target'].value);
         });
-        this.store_.onChangedText.subscribe((text) => {
-            this.text = text;
+        this.store_.onChangedText.subscribe((article: Article) => {
+            this.text = article.content;
         });
     }
 }
