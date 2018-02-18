@@ -1,9 +1,4 @@
-import { BehaviorSubject, Subject, Observable } from 'rxjs';
-
 export class IndexStore {
-
-    // mutation
-    private changeTextSubject_: BehaviorSubject<string> = new BehaviorSubject("");
 
     // state
     private text: string;
@@ -20,10 +15,5 @@ export class IndexStore {
     // mutation
     public mutateText(value): void {
         this.text = value; // mutate
-        this.changeTextSubject_.next(this.text); // render
-    }
-
-    public get onChangedText(): Observable<string> {
-        return this.changeTextSubject_.asObservable();
     }
 }

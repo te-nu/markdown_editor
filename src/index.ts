@@ -1,5 +1,5 @@
-import WriteArea from "./components/WriteArea.vue"
-import ViewArea from "./components/ViewArea.vue"
+import WriteArea from "./components/writeArea.vue"
+import ViewArea from "./components/viewArea.vue"
 import Vue from "vue";
 import {Component} from "vue-property-decorator"
 import { IndexStore } from "./stores/indexStore";
@@ -7,7 +7,7 @@ import { IndexStore } from "./stores/indexStore";
 @Component({
     components: {
         WriteArea,
-        ViewArea
+        ViewArea,
     }
 })
 class RootComponent extends Vue {

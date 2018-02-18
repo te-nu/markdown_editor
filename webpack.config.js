@@ -5,7 +5,7 @@ module.exports = {
     filename: './index.js'
   },
   resolve: {
-    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.vue'],
+    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.vue', '.pug', '.html', '.css'],
     alias: {
       'vue': 'vue/dist/vue.esm.js'
     },
@@ -14,17 +14,22 @@ module.exports = {
     ]
   },
   module: {
-    loaders: [
-      {
+    loaders: [{
         test: /\.tsx?$/,
         loader: 'ts-loader',
         options: {
           appendTsSuffixTo: [/\.vue$/]
         }
       },
-      { test: /\.vue/, loader: 'vue-loader' },
       {
-        // 対象となるファイルの拡張子
+        test: /\.pug$/,
+        loader: ['raw-loader', 'pug-html-loader']
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
         test: /\.css/,
         loaders: ['style-loader', 'css-loader']
       },
