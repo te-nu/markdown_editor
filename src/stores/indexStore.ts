@@ -9,6 +9,7 @@ export class IndexStore {
 
     // actions
     public inputText(value): void {
+        // APIを叩く処理はここに入れる
         this.mutateText(value); // commit
     }
 
